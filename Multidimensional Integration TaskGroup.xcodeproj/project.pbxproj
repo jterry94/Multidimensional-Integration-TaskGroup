@@ -8,12 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		A54A86402B575648002809F4 /* Multidimensional_Integration_TaskGroupApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A863F2B575648002809F4 /* Multidimensional_Integration_TaskGroupApp.swift */; };
-		A54A86422B575648002809F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A86412B575648002809F4 /* ContentView.swift */; };
 		A54A86442B575649002809F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A54A86432B575649002809F4 /* Assets.xcassets */; };
 		A54A86482B575649002809F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A54A86472B575649002809F4 /* Preview Assets.xcassets */; };
 		A54A86522B575649002809F4 /* Multidimensional_Integration_TaskGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A86512B575649002809F4 /* Multidimensional_Integration_TaskGroupTests.swift */; };
 		A54A865C2B575649002809F4 /* Multidimensional_Integration_TaskGroupUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A865B2B575649002809F4 /* Multidimensional_Integration_TaskGroupUITests.swift */; };
 		A54A865E2B575649002809F4 /* Multidimensional_Integration_TaskGroupUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A865D2B575649002809F4 /* Multidimensional_Integration_TaskGroupUITestsLaunchTests.swift */; };
+		A54A86702B575684002809F4 /* TestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866A2B575684002809F4 /* TestParser.swift */; };
+		A54A86712B575684002809F4 /* Bounding Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866B2B575684002809F4 /* Bounding Box.swift */; };
+		A54A86722B575684002809F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866C2B575684002809F4 /* ContentView.swift */; };
+		A54A86732B575684002809F4 /* MonteCarloIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866D2B575684002809F4 /* MonteCarloIntegration.swift */; };
+		A54A86742B575684002809F4 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866E2B575684002809F4 /* Operators.swift */; };
+		A54A86752B575684002809F4 /* ArrayStdDev.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866F2B575684002809F4 /* ArrayStdDev.swift */; };
+		A54A86762B576C9F002809F4 /* MonteCarloIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866D2B575684002809F4 /* MonteCarloIntegration.swift */; };
+		A54A86772B576CA0002809F4 /* MonteCarloIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866D2B575684002809F4 /* MonteCarloIntegration.swift */; };
+		A54A86782B576CA9002809F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866C2B575684002809F4 /* ContentView.swift */; };
+		A54A86792B576CAA002809F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866C2B575684002809F4 /* ContentView.swift */; };
+		A54A867A2B576CAD002809F4 /* Bounding Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866B2B575684002809F4 /* Bounding Box.swift */; };
+		A54A867B2B576CAD002809F4 /* Bounding Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866B2B575684002809F4 /* Bounding Box.swift */; };
+		A54A867C2B576CB1002809F4 /* ArrayStdDev.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866F2B575684002809F4 /* ArrayStdDev.swift */; };
+		A54A867D2B576CB1002809F4 /* ArrayStdDev.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866F2B575684002809F4 /* ArrayStdDev.swift */; };
+		A54A867E2B576CB6002809F4 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866E2B575684002809F4 /* Operators.swift */; };
+		A54A867F2B576CB7002809F4 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866E2B575684002809F4 /* Operators.swift */; };
+		A54A86802B576CC9002809F4 /* TestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866A2B575684002809F4 /* TestParser.swift */; };
+		A54A86812B576CCA002809F4 /* TestParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54A866A2B575684002809F4 /* TestParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +53,6 @@
 /* Begin PBXFileReference section */
 		A54A863C2B575648002809F4 /* Multidimensional Integration TaskGroup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Multidimensional Integration TaskGroup.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54A863F2B575648002809F4 /* Multidimensional_Integration_TaskGroupApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multidimensional_Integration_TaskGroupApp.swift; sourceTree = "<group>"; };
-		A54A86412B575648002809F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A54A86432B575649002809F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A54A86452B575649002809F4 /* Multidimensional_Integration_TaskGroup.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Multidimensional_Integration_TaskGroup.entitlements; sourceTree = "<group>"; };
 		A54A86472B575649002809F4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -45,6 +61,12 @@
 		A54A86572B575649002809F4 /* Multidimensional Integration TaskGroupUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Multidimensional Integration TaskGroupUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54A865B2B575649002809F4 /* Multidimensional_Integration_TaskGroupUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multidimensional_Integration_TaskGroupUITests.swift; sourceTree = "<group>"; };
 		A54A865D2B575649002809F4 /* Multidimensional_Integration_TaskGroupUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multidimensional_Integration_TaskGroupUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A54A866A2B575684002809F4 /* TestParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestParser.swift; sourceTree = "<group>"; };
+		A54A866B2B575684002809F4 /* Bounding Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bounding Box.swift"; sourceTree = "<group>"; };
+		A54A866C2B575684002809F4 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A54A866D2B575684002809F4 /* MonteCarloIntegration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonteCarloIntegration.swift; sourceTree = "<group>"; };
+		A54A866E2B575684002809F4 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		A54A866F2B575684002809F4 /* ArrayStdDev.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayStdDev.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +118,12 @@
 			isa = PBXGroup;
 			children = (
 				A54A863F2B575648002809F4 /* Multidimensional_Integration_TaskGroupApp.swift */,
-				A54A86412B575648002809F4 /* ContentView.swift */,
+				A54A866F2B575684002809F4 /* ArrayStdDev.swift */,
+				A54A866B2B575684002809F4 /* Bounding Box.swift */,
+				A54A866C2B575684002809F4 /* ContentView.swift */,
+				A54A866D2B575684002809F4 /* MonteCarloIntegration.swift */,
+				A54A866E2B575684002809F4 /* Operators.swift */,
+				A54A866A2B575684002809F4 /* TestParser.swift */,
 				A54A86432B575649002809F4 /* Assets.xcassets */,
 				A54A86452B575649002809F4 /* Multidimensional_Integration_TaskGroup.entitlements */,
 				A54A86462B575649002809F4 /* Preview Content */,
@@ -259,8 +286,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A54A86422B575648002809F4 /* ContentView.swift in Sources */,
+				A54A86712B575684002809F4 /* Bounding Box.swift in Sources */,
+				A54A86752B575684002809F4 /* ArrayStdDev.swift in Sources */,
+				A54A86702B575684002809F4 /* TestParser.swift in Sources */,
+				A54A86732B575684002809F4 /* MonteCarloIntegration.swift in Sources */,
+				A54A86722B575684002809F4 /* ContentView.swift in Sources */,
 				A54A86402B575648002809F4 /* Multidimensional_Integration_TaskGroupApp.swift in Sources */,
+				A54A86742B575684002809F4 /* Operators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +300,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A54A867A2B576CAD002809F4 /* Bounding Box.swift in Sources */,
+				A54A86762B576C9F002809F4 /* MonteCarloIntegration.swift in Sources */,
 				A54A86522B575649002809F4 /* Multidimensional_Integration_TaskGroupTests.swift in Sources */,
+				A54A867C2B576CB1002809F4 /* ArrayStdDev.swift in Sources */,
+				A54A86802B576CC9002809F4 /* TestParser.swift in Sources */,
+				A54A86782B576CA9002809F4 /* ContentView.swift in Sources */,
+				A54A867E2B576CB6002809F4 /* Operators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +314,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A54A86812B576CCA002809F4 /* TestParser.swift in Sources */,
+				A54A86772B576CA0002809F4 /* MonteCarloIntegration.swift in Sources */,
+				A54A867D2B576CB1002809F4 /* ArrayStdDev.swift in Sources */,
+				A54A867F2B576CB7002809F4 /* Operators.swift in Sources */,
 				A54A865E2B575649002809F4 /* Multidimensional_Integration_TaskGroupUITestsLaunchTests.swift in Sources */,
+				A54A867B2B576CAD002809F4 /* Bounding Box.swift in Sources */,
+				A54A86792B576CAA002809F4 /* ContentView.swift in Sources */,
 				A54A865C2B575649002809F4 /* Multidimensional_Integration_TaskGroupUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

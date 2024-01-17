@@ -50,7 +50,7 @@ typealias integrationFunctionHandler = (_ numberOfDimensions: Int, _ arrayOfInpu
     
     init(){
         
-        functionForIntegration = eToTheX
+        functionForIntegration = eToTheMinusX
     }
     
     /// calculateMonteCarloIntegral
@@ -60,7 +60,7 @@ typealias integrationFunctionHandler = (_ numberOfDimensions: Int, _ arrayOfInpu
     ///   - lowerLimit: lower bound of the integration, needs one value per each dimension
     ///   - upperLimit: upper bound of the integration, needs one value per each dimension
     ///   - functionToBeIntegrated: passed in function to be integrated over the range lowerLimit to UpperLimit. Must be of type integrationFunctionHandler
-    func calculateMonteCarloIntegral(dimensions: Int, guesses: Int32, lowerLimit: [Double], upperLimit: [Double], functionToBeIntegrated: integrationFunctionHandler) -> Double{
+    func calculateMonteCarloIntegral(dimensions: Int, guesses: Int32, lowerLimit: [Double], upperLimit: [Double], functionToBeIntegrated: integrationFunctionHandler) async -> Double{
         
         var currentIntegral = 0.0
         var parameters :[Double] = []
@@ -78,6 +78,7 @@ typealias integrationFunctionHandler = (_ numberOfDimensions: Int, _ arrayOfInpu
             
         }
         
+        await updateProgress()
         
         return(currentIntegral)
         
@@ -203,9 +204,44 @@ typealias integrationFunctionHandler = (_ numberOfDimensions: Int, _ arrayOfInpu
         errorValue = ""
         stdDevValue = ""
         timeValue = ""
+        currentIteration = 0.0
+        calculating = true
+    }
+    
+    @MainActor func updateProgress() {
+        self.currentIteration += 1.0
+        
+    }
+    
+    @MainActor func updateTheGUIOnTheMainThread(_ myIntegral: Double) {
+        self.integralValue = myIntegral.formatted(.number.precision(.fractionLength(7)))
+        
+        self.exactValue = self.exact.formatted(.number.precision(.fractionLength(7)))
+        self.stdDevValue = self.stdDev.formatted(.number.precision(.fractionLength(7)))
+        
+        self.errorValue = self.error.formatted(.number.precision(.fractionLength(7)))
+        
+        self.stop = DispatchTime.now()    //end time
+        
+        self.calculating = false
+        
+        // self.progressIndicator.stopAnimation(self)
+        // self.integrateButton.isEnabled = true
+        
+        self.nanotime = self.stop.uptimeNanoseconds - self.start.uptimeNanoseconds //difference in nanoseconds from the start of the calculation until the end.
+        
+        self.timeInterval = Double(self.nanotime) / 1_000_000_000
+        self.timeValue = self.timeInterval.formatted(.number.precision(.fractionLength(7)))
     }
     
     func startTheIntegration() async {
+        
+        let theIterations = Int(numberOfIterations)
+        iterations = Double(theIterations!)
+        
+        let myGuesses = Int(numberOfGuesses)
+        currentIteration = 0.0
+        //print (myGuesses)
             
         await blackTheDisplayAtTheStartOfTheCalculation()
             
@@ -245,118 +281,92 @@ typealias integrationFunctionHandler = (_ numberOfDimensions: Int, _ arrayOfInpu
             
             
             
-            let theIterations = Int(numberOfIterations)
-            iterations = Double(theIterations!)
             
-            let myGuesses = Int(numberOfGuesses)
-            //print (myGuesses)
+            
             
             start = DispatchTime.now() // starting time of the integration
             //progressIndicator.startAnimation(self)
-            self.calculating = true
+            
             
             //integrateButton.isEnabled = false
             
-            let myQueue = DispatchQueue.init(label: "integrationQueue", qos: .userInitiated, attributes: .concurrent)
+        
+        let resultsOfIntegrationCalculation = await withTaskGroup(of: (counter: Int, value: Double).self /* this is the return from the taskGroup*/,
+            returning: [(counter: Int, value: Double)].self /* this is the return of all of the results */,
+            body: { taskGroup in  /*This is the body of the task*/
             
-            DispatchQueue.global(qos: .userInitiated).async {
+            // We can use `taskGroup` to spawn child tasks here.
+            
+            for i in 0..<theIterations! {
+            taskGroup.addTask {
+                
+                //Create a new instance of the Calculator object so that each has it's own calculating function to avoid potential issues with reentrancy problem
+                let integralResult = await self.calculateMonteCarloIntegral(dimensions: Int(self.dimensions), guesses: Int32(myGuesses!), lowerLimit: self.limitsOfIntegration.0, upperLimit: self.limitsOfIntegration.1, functionToBeIntegrated: self.functionForIntegration!)
+                
+                let resultTuple = (counter: i, value: integralResult)
                 
                 
-                self.integration(iterations: Int32(theIterations!), guesses: Int32(myGuesses!), lowerLimit:self.limitsOfIntegration.0, upperLimit:self.limitsOfIntegration.1, theQueue: myQueue)
+                return (resultTuple)  /* this is the return from the taskGroup*/
                 
             }
             
-            print("done")
+                
+            }
             
-        
-    }
-    
-    
-    /// integration
-    /// does the heavily lifting and performs the threaded Monte Carlo Integration
-    /// - Parameters:
-    ///   - iterations: number of iterations
-    ///   - guesses: number of guesses
-    ///   - lowerLimit: array of the lower limits of integration should be >= number of dimensions
-    ///   - upperLimit: array of the upper limits of integration should be >= number of dimensions
-    ///   - theQueue: DispatchQueue in which we will perform the threaded integration. This can be concurrent or synchrous as needed. Testing usally synchronously. Calculations done concurrently.
-    func integration(iterations: Int32, guesses: Int32, lowerLimit:[Double], upperLimit:[Double], theQueue: DispatchQueue)  {
-        
-        var integralArray :[Double] = []
-        
-        theQueue.async{ [self] in
             
-            DispatchQueue.concurrentPerform(iterations: Int(iterations), execute: { index in
+            // Collate the results of all child tasks
+            var combinedTaskResults :[(counter: Int, value: Double)] = []
+            for await result in taskGroup {
                 
-                //print("started index \(index)")
-                
-                DispatchQueue.main.async{
-                    
-                    self.currentIteration = Double(index)
-                }
-                
-                
-                integralArray.append(calculateMonteCarloIntegral(dimensions: Int(self.dimensions), guesses: guesses, lowerLimit: lowerLimit, upperLimit: upperLimit, functionToBeIntegrated: self.functionForIntegration!))
-                
-                
-            })
+                combinedTaskResults.append(result)
+            }
             
+            return combinedTaskResults  /* this is the return from the result collation */
+            
+        })
+        
+        //Do whatever processing that you need with the returned results of all of the child tasks here.
+        
         //Calculate the Volume of the Multidimensional Box
             
         let myVolume = BoundingBox()
-        
-        myVolume.initWithDimensionsAndRanges(dimensions: Int(self.dimensions), lowerBound: lowerLimit, upperBound: upperLimit)
-        
-        
+
+        myVolume.initWithDimensionsAndRanges(dimensions: Int(self.dimensions), lowerBound: limitsOfIntegration.0, upperBound: limitsOfIntegration.1)
+
+
         let volume = myVolume.volume
         
-        let integralValue = integralArray.map{$0 * (volume / Double(guesses))}
         
+
+        let integralValue = resultsOfIntegrationCalculation.map{$0.1 * (volume / Double(myGuesses!))}
+        
+
         //print(integralValue)
-        
+
         let myIntegral = integralValue.mean
             let myStdDev = integralValue.stdev
-        
+
         print("integral is \(myIntegral) exact is \(self.exact)")
             
             
         self.integral = myIntegral
         self.stdDev = myStdDev ?? 0.0
-            self.error = exact - myIntegral
-        
-        DispatchQueue.main.async{
-            
-            self.integralValue = myIntegral.formatted(.number.precision(.fractionLength(7)))
-            
-            self.exactValue = self.exact.formatted(.number.precision(.fractionLength(7)))
-            self.stdDevValue = self.stdDev.formatted(.number.precision(.fractionLength(7)))
-            
-            self.errorValue = self.error.formatted(.number.precision(.fractionLength(7)))
-            
-        self.stop = DispatchTime.now()    //end time
-            
-            self.calculating = false
-            
-           // self.progressIndicator.stopAnimation(self)
-           // self.integrateButton.isEnabled = true
-            
-            self.nanotime = self.stop.uptimeNanoseconds - self.start.uptimeNanoseconds //difference in nanoseconds from the start of the calculation until the end.
-            
-            self.timeInterval = Double(self.nanotime) / 1_000_000_000
-            self.timeValue = self.timeInterval.formatted(.number.precision(.fractionLength(7)))
-            
-            
-        
-            
-            
-        }
-            
+        self.error = exact - myIntegral
         
         
         
-        }
-         
+        await updateTheGUIOnTheMainThread(myIntegral)
+                
+            
+            
+            //print("done")
+            
         
     }
     
+    
+    
 }
+
+
+

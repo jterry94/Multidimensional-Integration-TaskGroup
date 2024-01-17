@@ -18,7 +18,7 @@ struct ContentView: View {
         VStack {
             // Button to start calculation
             Button("Integrate") {
-                integrateButton()
+                
                 startTheIntegration()
             }
             .padding()
@@ -120,16 +120,7 @@ struct ContentView: View {
     }
     
     // Functions
-    func performIntegration() {
-        // Implement your integration logic here
-        // Update progress as needed
-    }
     
-    // Function associated with the integrateButton
-    func integrateButton() {
-        performIntegration()
-        // Update other variables or UI elements as needed
-    }
     
     /// startTheIntegration
     /// - Parameter sender: normally integration button in the GUI
@@ -154,8 +145,8 @@ struct ContentView: View {
     }
 }
 
-/*
+
 #Preview {
     ContentView()
 }
-*/
+
